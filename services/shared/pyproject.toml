@@ -1,0 +1,14 @@
+[project]
+name = "floodwatch-shared"
+version = "0.1.0"
+description = "FloodWatch AI shared Python core: structured logging, middleware, errors, cache, health"
+requires-python = ">=3.11"
+dependencies = []
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
