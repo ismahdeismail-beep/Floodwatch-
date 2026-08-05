@@ -1,3 +1,13 @@
+from shared.errors import (
+    ApiError,
+    ConflictError,
+    InternalError,
+    NotFoundError,
+    ServiceUnavailableError,
+    UnauthorizedError,
+    ValidationError,
+    register_error_handlers,
+)
 from shared.logging import get_request_id, request_id_var, set_request_id, setup_logging
 from shared.middleware import RequestIDMiddleware
 
@@ -10,4 +20,12 @@ __all__ = [
     "get_request_id",
     "set_request_id",
     "RequestIDMiddleware",
+    "ApiError",
+    "NotFoundError",
+    "ValidationError",
+    "ConflictError",
+    "UnauthorizedError",
+    "ServiceUnavailableError",
+    "InternalError",
+    "register_error_handlers",
 ]
