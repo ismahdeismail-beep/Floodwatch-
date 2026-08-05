@@ -22,7 +22,7 @@
   "devDependencies": {
     "@floodwatch/eslint-config": "*",
     "@floodwatch/tsconfig": "*",
-    "@types/node": "^22.10.0",
+    "@types/node": "^26.1.2",
     "@types/react": "19.0.14",
     "@types/react-dom": "19.0.6",
     "autoprefixer": "^10.4.20",
