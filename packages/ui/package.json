@@ -5,14 +5,16 @@
   "description": "Shared React UI components for FloodWatch AI",
   "main": "./src/index.tsx",
   "types": "./src/index.tsx",
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "scripts": {
     "lint": "eslint src",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
     "@floodwatch/eslint-config": "*",
