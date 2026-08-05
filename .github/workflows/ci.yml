@@ -14,7 +14,7 @@ jobs:
     name: JS — lint · typecheck · build · test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v4
         with:
@@ -44,7 +44,7 @@ jobs:
       matrix:
         service: [api-gateway, auth, weather, hydrology, satellite, gis, ai, alerts, analytics]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-python@v5
         with:
@@ -73,7 +73,7 @@ jobs:
       matrix:
         service: [api-gateway, auth, weather, hydrology, satellite, gis, ai, alerts, analytics]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Build image
         working-directory: services/${{ matrix.service }}
