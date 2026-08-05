@@ -3,7 +3,10 @@ name = "floodwatch-shared"
 version = "0.1.0"
 description = "FloodWatch AI shared Python core: structured logging, middleware, errors, cache, health"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = ["starlette>=0.40"]
+
+[project.optional-dependencies]
+dev = ["pytest", "httpx"]
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]
