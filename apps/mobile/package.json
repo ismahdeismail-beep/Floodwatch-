@@ -13,7 +13,7 @@
     "lint": "expo lint"
   },
   "dependencies": {
-    "@expo/vector-icons": "^14.1.0",
+    "@expo/vector-icons": "^15.1.1",
     "@floodwatch/api-client": "*",
     "@floodwatch/types": "*",
     "@floodwatch/utils": "*",
