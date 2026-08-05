@@ -32,6 +32,26 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --port <port>
 ```
 
+### Running Backend Infrastructure (WSL2 Native)
+
+Services require PostgreSQL+PostGIS, Redis, and MinIO. Instead of Docker, run them natively in WSL2:
+
+```powershell
+# First-time setup (installs everything in WSL2 Ubuntu)
+.\scripts\wsl-services.ps1 setup
+
+# Daily usage
+.\scripts\wsl-services.ps1 start    # Start all services
+.\scripts\wsl-services.ps1 stop     # Stop all services
+.\scripts\wsl-services.ps1 status   # Check what's running
+```
+
+Or directly in WSL2:
+```bash
+bash ~/.floodwatch/start-services.sh
+bash ~/.floodwatch/status-services.sh
+```
+
 All services follow the same 12-file layout (see [Services Reference](../architecture/services.md)).
 
 ## Adding a Shared Type

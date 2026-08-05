@@ -1,7 +1,14 @@
 # ═══════════════════════════════════════════════════════════════
-# FloodWatch AI — Full Local Development Stack
-# Usage:  docker compose up -d postgres redis minio   (core infra)
-#         docker compose up --build                    (full stack)
+# FloodWatch AI — Docker Compose (OPTIONAL)
+# ═══════════════════════════════════════════════════════════════
+# NOTE: For local development, use WSL2 native services instead:
+#   .\scripts\wsl-services.ps1 setup   (first time)
+#   .\scripts\wsl-services.ps1 start   (daily)
+#
+# This file is kept for:
+#   - CI/CD pipelines (GitHub Actions)
+#   - Production container builds
+#   - Developers who prefer Docker
 # ═══════════════════════════════════════════════════════════════
 name: floodwatch
 

@@ -193,7 +193,7 @@ FloodWatch-AI/
 
 ### Prerequisites
 
-- Node.js 20+, Python 3.12+, Docker Desktop, Git
+- Node.js 20+, Python 3.12+, Git, WSL2 with Ubuntu
 
 ### 1. Environment setup
 
@@ -207,11 +207,19 @@ FloodWatch-AI/
 
 The setup script copies `.env.example` → `.env`, starts core infrastructure (PostGIS, Redis, MinIO), and installs JS dependencies.
 
-### 2. Start core infrastructure
+### 2. Start core infrastructure (WSL2 Native)
 
-```bash
-docker compose up -d postgres redis minio
+No Docker required — runs natively in your existing WSL2 Ubuntu:
+
+```powershell
+# First-time setup
+.\scripts\wsl-services.ps1 setup
+
+# Start services
+.\scripts\wsl-services.ps1 start
 ```
+
+This starts PostgreSQL+PostGIS (5432), Redis (6379), and MinIO (9000/9001) natively in WSL2.
 
 ### 3. Run a backend service
 
@@ -235,7 +243,7 @@ npm run dev
 
 ```bash
 npm run dev          # all JS apps (turbo)
-docker compose up    # full stack (infra + all services)
+# Backend services run individually via uvicorn (see step 3)
 ```
 
 ---
