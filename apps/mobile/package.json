@@ -17,7 +17,7 @@
     "@floodwatch/api-client": "*",
     "@floodwatch/types": "*",
     "@floodwatch/utils": "*",
-    "expo": "~53.0.0",
+    "expo": "~57.0.9",
     "expo-location": "~18.0.7",
     "expo-router": "~5.0.5",
     "expo-status-bar": "~2.2.3",
