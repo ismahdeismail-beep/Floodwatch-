@@ -1,3 +1,4 @@
+from shared.cache import Cache
 from shared.errors import (
     ApiError,
     ConflictError,
@@ -28,4 +29,5 @@ __all__ = [
     "ServiceUnavailableError",
     "InternalError",
     "register_error_handlers",
+    "Cache",
 ]
