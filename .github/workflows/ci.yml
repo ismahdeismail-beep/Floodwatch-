@@ -22,7 +22,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Lint
         run: npm run lint
@@ -50,6 +50,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install shared package + pytest
+        run: pip install -e services/shared[dev]
+
       - name: Install service requirements
         working-directory: services/${{ matrix.service }}
         run: |
@@ -76,5 +79,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build image
-        working-directory: services/${{ matrix.service }}
-        run: docker build -t floodwatch/${{ matrix.service }}:ci .
+        run: |
+          if [ "${{ matrix.service }}" = "weather" ]; then
+            docker build -t floodwatch/weather:ci -f services/weather/Dockerfile .
+          else
+            docker build -t floodwatch/${{ matrix.service }}:ci services/${{ matrix.service }}
+          fi

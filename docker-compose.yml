@@ -97,7 +97,9 @@ services:
 
   weather:
     <<: *service-defaults
-    build: ./services/weather
+    build:
+      context: .
+      dockerfile: services/weather/Dockerfile
     ports: ["8002:8002"]
 
   hydrology:

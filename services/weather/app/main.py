@@ -2,20 +2,27 @@
 from __future__ import annotations
 
 import logging
-from datetime import datetime, timezone
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from shared import (
+    RequestIDMiddleware,
+    __version__,
+    health_router,
+    register_error_handlers,
+    setup_logging,
+)
+
 from .config import settings
 
-logging.basicConfig(level=settings.log_level)
+setup_logging(getattr(logging, settings.log_level.upper()))
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title=settings.service_title,
     description=settings.service_description,
-    version="0.1.0",
+    version=__version__,
 )
 
 app.add_middleware(
@@ -25,18 +32,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(RequestIDMiddleware)
 
+register_error_handlers(app)
 
-@app.get("/health", tags=["system"])
-def health() -> dict:
-    """Liveness probe used by Docker/Kubernetes."""
-    return {
-        "status": "ok",
-        "service": settings.service_name,
-        "version": "0.1.0",
-        "time": datetime.now(timezone.utc).isoformat(),
-    }
-
+app.router.routes.extend(health_router(settings.service_name, __version__).routes)
 
 from . import routes  # noqa: E402
 

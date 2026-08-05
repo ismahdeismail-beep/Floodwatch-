@@ -5,10 +5,13 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY services/weather/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app ./app
+COPY services/shared/shared ./shared
+COPY services/weather/app ./app
+
+ENV PYTHONPATH=/app
 
 EXPOSE 8002
 

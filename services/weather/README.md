@@ -35,8 +35,7 @@ Swagger UI: http://localhost:8002/docs
 ## Run with Docker
 
 ```bash
-cd services/weather
-docker build -t floodwatch/weather .
+docker build -t floodwatch/weather -f services/weather/Dockerfile .
 docker run -p 8002:8002 floodwatch/weather
 ```
 
