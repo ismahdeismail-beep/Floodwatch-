@@ -1,11 +1,14 @@
 version: 2
 
+# Limits and grouping keep the update stream reviewable: one or two PRs per
+# ecosystem at a time, with minor/patch bumps batched together. Major bumps
+# arrive individually so they can be reviewed and CI-checked before merge.
 updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 5
     groups:
       nextjs:
         patterns: ["next", "eslint-config-next"]
@@ -16,18 +19,35 @@ updates:
     directory: "/services/api-gateway"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 2
+    groups:
+      patch-minor:
+        update-types: ["patch", "minor"]
+      major:
+        update-types: ["major"]
 
   - package-ecosystem: "pip"
     directory: "/services/ai"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 2
+    groups:
+      patch-minor:
+        update-types: ["patch", "minor"]
+      major:
+        update-types: ["major"]
 
   - package-ecosystem: "docker"
     directory: "/services/api-gateway"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 1
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 2
+    groups:
+      actions:
+        patterns: ["*"]
