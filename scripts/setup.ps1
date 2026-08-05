@@ -16,16 +16,19 @@ if (-not (Test-Path -LiteralPath $envFile)) {
     Write-Host "    .env already exists - skipping." -ForegroundColor Green
 }
 
-# 2. Check Docker
-if (-not (Get-Command docker -ErrorAction SilentlyContinue)) {
-    Write-Host "    Docker not found. Install Docker Desktop first." -ForegroundColor Red
+# 2. Check WSL2
+$wslDistro = wsl -l -q 2>$null | Select-Object -First 1
+if (-not $wslDistro) {
+    Write-Host "    WSL2 not found. Install WSL2 with Ubuntu first:" -ForegroundColor Red
+    Write-Host "    wsl --install -d Ubuntu" -ForegroundColor Yellow
     exit 1
 }
+Write-Host "    WSL2 distro: $wslDistro" -ForegroundColor Green
 
-# 3. Start core infrastructure
-Write-Host "==> Starting core infrastructure (postgres, redis, minio)..." -ForegroundColor Cyan
-docker compose up -d postgres redis minio
-if ($LASTEXITCODE -ne 0) { throw "docker compose failed" }
+# 3. Start core infrastructure via WSL2
+Write-Host "==> Starting core infrastructure via WSL2 (postgres, redis, minio)..." -ForegroundColor Cyan
+$setupScript = Join-Path $PSScriptRoot "wsl-services.ps1"
+& $setupScript start
 
 # 4. Install JS workspace dependencies
 if (Get-Command node -ErrorAction SilentlyContinue) {

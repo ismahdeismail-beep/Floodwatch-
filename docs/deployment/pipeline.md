@@ -20,7 +20,7 @@ FloodWatch AI ships through GitHub Actions with a promote-on-green model.
 4. **Build** — `npm run build` (turbo; skips mobile native build — runs
    `tsc --noEmit` + `expo export` sanity check instead).
 5. **Python checks** — per service: install requirements, `pytest`, `py_compile`.
-6. **Docker build** — `docker build` each service image (cached layers).
+6. **Docker build** — `docker build` each service image for production deployment (cached layers).
 
 ## Deploy Stages (deploy.yml)
 

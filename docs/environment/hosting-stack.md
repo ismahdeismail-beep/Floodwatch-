@@ -39,14 +39,32 @@ lists the platform services used and the configuration contract each one expects
 - **CI/CD**: secrets stored in GitHub Actions secrets; deployed as Cloud Run env
   or Vercel project env.
 
-## Local Emulation
+## Local Emulation (WSL2 Native)
 
-Docker Compose (`docker-compose.yml`) provides:
+No Docker required. Backend infrastructure runs natively in WSL2 Ubuntu:
 
-- `postgres` — postgis/postgis:16-3.4 (local Supabase substitute)
-- `redis` — redis:7 (cache, queues, pub/sub)
-- `minio` + `minio-init` — S3-compatible object storage (local GCS substitute)
-- All 9 services (`api-gateway` … `analytics`)
+| Service | Port | Management |
+|---------|------|------------|
+| `postgres` | 5432 | PostgreSQL + PostGIS (local Supabase substitute) |
+| `redis` | 6379 | Cache, queues, pub/sub |
+| `minio` | 9000/9001 | S3-compatible object storage (local GCS substitute) |
+
+**Quick commands:**
+```powershell
+.\scripts\wsl-services.ps1 setup     # First-time install in WSL2
+.\scripts\wsl-services.ps1 start     # Start all services
+.\scripts\wsl-services.ps1 status    # Check what's running
+.\scripts\wsl-services.ps1 stop      # Stop everything
+```
+
+Or directly in WSL2 Ubuntu:
+```bash
+bash ~/.floodwatch/start-services.sh
+bash ~/.floodwatch/status-services.sh
+bash ~/.floodwatch/stop-services.sh
+```
+
+**Docker Compose** (`docker-compose.yml`) is still available for CI/CD pipelines and developers who prefer containers.
 
 ## Security Rules
 

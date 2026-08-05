@@ -14,11 +14,12 @@ else
   echo "    .env already exists - skipping."
 fi
 
-if command -v docker >/dev/null 2>&1; then
+# Start core infrastructure natively (no Docker required)
+if [[ -d "$HOME/.floodwatch" ]]; then
   echo "==> Starting core infrastructure (postgres, redis, minio)..."
-  docker compose up -d postgres redis minio
+  bash "$HOME/.floodwatch/start-services.sh"
 else
-  echo "    Docker not found - skipping infrastructure."
+  echo "    WSL2 services not installed. Run: bash scripts/wsl-setup.sh"
 fi
 
 if command -v node >/dev/null 2>&1; then

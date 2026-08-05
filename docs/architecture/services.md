@@ -60,8 +60,13 @@ uvicorn app.main:app --reload --port 8006
 # Swagger: http://localhost:8006/docs
 ```
 
-Or run the full stack:
+Or run the full backend infrastructure via WSL2 (no Docker):
+
+```powershell
+.\scripts\wsl-services.ps1 start    # Start PostgreSQL, Redis, MinIO
+```
 
 ```bash
-docker compose up --build
+# In WSL2 Ubuntu
+bash ~/.floodwatch/start-services.sh
 ```

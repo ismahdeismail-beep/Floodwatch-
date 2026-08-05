@@ -40,6 +40,7 @@ Central documentation for the FloodWatch AI platform.
 
 | Document | Description |
 |----------|-------------|
+| [Local Development Setup](../scripts/wsl-setup.sh) | WSL2 native services (PostgreSQL, Redis, MinIO) — no Docker required |
 | [AI Development Environment](environment/ai-development-environment.md) | ML toolchain, GPUs, model training setup |
 | [Hosting & Platform Services](environment/hosting-stack.md) | Platform services used by the platform |
 | [Development Guide](development/contributing.md) | Monorepo conventions, workspace commands, PR workflow |

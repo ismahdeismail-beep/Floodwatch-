@@ -149,11 +149,11 @@ FloodWatch-AI/
 │   ├── ai/                  # ML prediction engine, model registry (8006)
 │   ├── alerts/              # Multi-channel notification engine (8007)
 │   └── analytics/           # Trends, model accuracy, impact analytics (8008)
-├── infrastructure/          # Terraform, K8s, Docker, monitoring, Cloudflare, nginx
+├── infrastructure/          # Terraform, K8s, monitoring, Cloudflare, nginx
 ├── docs/                    # Documentation (see docs/README.md)
 ├── datasets/                # raw/ processed/ geodata/ historical_floods/
 ├── models/                  # Versioned model registry
-├── scripts/                 # Setup, DB init, seeding, data fetch helpers
+├── scripts/                 # Setup, WSL2 services, DB init, seeding, data fetch helpers
 ├── tests/                   # e2e (Playwright) + load (Locust)
 └── .github/                 # CI/CD workflows, Dependabot, CodeQL, Release Please
 ```
@@ -170,7 +170,7 @@ FloodWatch-AI/
 | GIS | PostGIS, GeoPandas, Rasterio, GDAL, Shapely, OSMnx, xarray, rioxarray |
 | Climate AI | GraphCast, Pangu-Weather, FourCastNet (evaluation track) |
 | Database | PostgreSQL + PostGIS, Redis, MinIO (object storage) |
-| Infra | Docker, Kubernetes, GitHub Actions, Cloudflare, Vercel, Google Cloud |
+| Infra | WSL2 (local dev), Kubernetes, GitHub Actions, Cloudflare, Vercel, Google Cloud |
 | Observability | Prometheus, Grafana, Loki, OpenTelemetry |
 
 ---

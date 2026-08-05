@@ -4,9 +4,9 @@
 
 | Concern | Tool | Notes |
 |---------|------|-------|
-| Metrics | Prometheus | `/metrics` endpoint on every service; scrape via Docker Compose in dev, GCP Managed Prometheus in prod |
+| Metrics | Prometheus | `/metrics` endpoint on every service; scrape via WSL2 in dev, GCP Managed Prometheus in prod |
 | Dashboards | Grafana | Dashboards for services, pipeline, alerts, model drift |
-| Logs | Loki | Structured JSON logs collected from containers (docker compose loki driver / Alloy in prod) |
+| Logs | Loki | Structured JSON logs collected from services (Alloy in prod) |
 | Traces | OpenTelemetry | Prepared; spans for request lifecycle across gateway → service |
 
 ## Service Exports
