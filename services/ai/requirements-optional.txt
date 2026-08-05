@@ -9,4 +9,4 @@ onnxruntime>=1.19
 # Hyperparameter optimization
 optuna>=4.0
 # Categorical boosting
-catboost>=1.2
+catboost>=1.2.10
