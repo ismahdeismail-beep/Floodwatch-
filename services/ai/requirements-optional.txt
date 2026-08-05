@@ -1,0 +1,12 @@
+# Optional heavy dependencies for ai (not installed by default).
+
+# Deep learning (PyTorch)
+torch>=2.4
+# Vision models
+torchvision>=0.19
+# Optimized inference
+onnxruntime>=1.19
+# Hyperparameter optimization
+optuna>=4.0
+# Categorical boosting
+catboost>=1.2

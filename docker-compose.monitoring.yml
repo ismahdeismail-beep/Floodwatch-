@@ -1,0 +1,36 @@
+# Monitoring stack for local development.
+# Usage: docker compose up -d (core stack)   THEN   docker compose -f docker-compose.monitoring.yml up -d
+# The floodwatch network is created by the root docker-compose.yml — start it first so
+# Prometheus can reach the services by container name.
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    volumes:
+      - ./infrastructure/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    networks: [floodwatch]
+
+  grafana:
+    image: grafana/grafana:11.1.0
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./infrastructure/monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./infrastructure/monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "3000:3000"
+    networks: [floodwatch]
+
+  loki:
+    image: grafana/loki:3.0.0
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks: [floodwatch]
+
+networks:
+  floodwatch:
+    external: true

@@ -1,0 +1,133 @@
+# ═══════════════════════════════════════════════════════════════
+# FloodWatch AI — Full Local Development Stack
+# Usage:  docker compose up -d postgres redis minio   (core infra)
+#         docker compose up --build                    (full stack)
+# ═══════════════════════════════════════════════════════════════
+name: floodwatch
+
+x-service-defaults: &service-defaults
+  restart: unless-stopped
+  env_file: .env
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_started
+  networks:
+    - floodwatch
+
+services:
+  # ── Core infrastructure ────────────────────────────────────
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: floodwatch-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-floodwatch}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-floodwatch_dev}
+      POSTGRES_DB: ${POSTGRES_DB:-floodwatch}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./infrastructure/docker/postgres-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-floodwatch} -d ${POSTGRES_DB:-floodwatch}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - floodwatch
+
+  redis:
+    image: redis:7-alpine
+    container_name: floodwatch-redis
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    networks:
+      - floodwatch
+
+  minio:
+    image: minio/minio:latest
+    container_name: floodwatch-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-floodwatch}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:-floodwatch_dev}
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - miniodata:/data
+    networks:
+      - floodwatch
+
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://minio:9000 ${MINIO_ACCESS_KEY:-floodwatch} ${MINIO_SECRET_KEY:-floodwatch_dev} &&
+      mc mb --ignore-existing local/${MINIO_BUCKET:-floodwatch-data} &&
+      exit 0
+      "
+    networks:
+      - floodwatch
+
+  # ── Backend microservices ──────────────────────────────────
+  api-gateway:
+    <<: *service-defaults
+    build: ./services/api-gateway
+    ports: ["8000:8000"]
+
+  auth:
+    <<: *service-defaults
+    build: ./services/auth
+    ports: ["8001:8001"]
+
+  weather:
+    <<: *service-defaults
+    build: ./services/weather
+    ports: ["8002:8002"]
+
+  hydrology:
+    <<: *service-defaults
+    build: ./services/hydrology
+    ports: ["8003:8003"]
+
+  satellite:
+    <<: *service-defaults
+    build: ./services/satellite
+    ports: ["8004:8004"]
+
+  gis:
+    <<: *service-defaults
+    build: ./services/gis
+    ports: ["8005:8005"]
+
+  ai:
+    <<: *service-defaults
+    build: ./services/ai
+    ports: ["8006:8006"]
+
+  alerts:
+    <<: *service-defaults
+    build: ./services/alerts
+    ports: ["8007:8007"]
+
+  analytics:
+    <<: *service-defaults
+    build: ./services/analytics
+    ports: ["8008:8008"]
+
+networks:
+  floodwatch:
+    driver: bridge
+
+volumes:
+  pgdata:
+  redisdata:
+  miniodata:

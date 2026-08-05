@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "FloodWatch AI",
+    "slug": "floodwatch-ai",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "scheme": "floodwatch",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "ai.floodwatch.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "FloodWatch AI uses your location to show flood risk near you."
+      }
+    },
+    "android": {
+      "package": "ai.floodwatch.app",
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
+    },
+    "plugins": ["expo-router", "expo-location"],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

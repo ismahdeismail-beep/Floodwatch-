@@ -1,0 +1,12 @@
+# Optional heavy dependencies for gis (not installed by default).
+
+# Road network analysis
+osmnx>=1.9
+# Routing and graph algorithms
+networkx>=3.3
+# Flow direction
+pyflwdir>=0.5
+# Terrain analysis (WhiteboxTools)
+whitebox>=2.3
+# Watershed delineation
+taudem

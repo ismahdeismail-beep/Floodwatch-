@@ -1,0 +1,12 @@
+# Optional heavy dependencies for hydrology (not installed by default).
+
+# Gridded climate/hydrology datasets
+xarray>=2024.1
+# Raster-based analysis
+rioxarray>=0.16
+# River flow direction and accumulation
+pyflwdir>=0.5
+# Fast analytics on parquet archives
+duckdb>=1.1
+# Terrain analysis (WhiteboxTools)
+whitebox>=2.3

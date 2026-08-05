@@ -1,0 +1,77 @@
+# ── Dependencies ───────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# ── Builds ─────────────────────────────────────
+.next/
+out/
+dist/
+build/
+.turbo/
+expo-build/
+*.tsbuildinfo
+
+# ── Python ─────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Environment & secrets ──────────────────────
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# ── Test artifacts ─────────────────────────────
+coverage/
+playwright-report/
+test-results/
+htmlcov/
+
+# ── Mobile / Expo ──────────────────────────────
+.expo/
+.expo-shared/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# ── Data & models (large artifacts, gitignored) ─
+datasets/raw/*
+datasets/processed/*
+datasets/geodata/*
+models/registry/*
+!datasets/raw/.gitkeep
+!datasets/processed/.gitkeep
+!datasets/geodata/.gitkeep
+!models/registry/.gitkeep
+*.tif
+*.tiff
+*.hdf
+*.hdf5
+*.nc
+
+# ── OS / editor ────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+
+# ── Logs ───────────────────────────────────────
+*.log
+logs/
+
+# ── Nested scaffold clone (empty GitHub mirror) ─
+.devcontainer/Floodwatch-/
+
+# ── Superpowers workspace (git-ignored scratch) ─
+.superpowers/

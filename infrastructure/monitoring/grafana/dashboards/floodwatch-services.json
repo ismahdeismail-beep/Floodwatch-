@@ -1,0 +1,73 @@
+{
+  "title": "FloodWatch AI — Service Fleet",
+  "uid": "floodwatch-services",
+  "schemaVersion": 39,
+  "version": 1,
+  "editable": true,
+  "refresh": "30s",
+  "time": { "from": "now-6h", "to": "now" },
+  "timezone": "Africa/Nairobi",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Services healthy",
+      "gridPos": { "h": 6, "w": 8, "x": 0, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "targets": [
+        {
+          "expr": "count(up{job=\"floodwatch-services\"} == 1)",
+          "legendFormat": "healthy"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Total services",
+      "gridPos": { "h": 6, "w": 8, "x": 8, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "targets": [
+        {
+          "expr": "count(up{job=\"floodwatch-services\"})",
+          "legendFormat": "total"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "API p95 latency (ms)",
+      "gridPos": { "h": 6, "w": 8, "x": 16, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le)) * 1000",
+          "legendFormat": "p95"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Request rate by service",
+      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 6 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "targets": [
+        {
+          "expr": "sum(rate(http_requests_total[5m])) by (service)",
+          "legendFormat": "{{service}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Error rate by service",
+      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 16 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "targets": [
+        {
+          "expr": "sum(rate(http_requests_total{status=~\"5..\"}[5m])) by (service) / clamp_min(sum(rate(http_requests_total[5m])) by (service), 0.0001)",
+          "legendFormat": "{{service}}"
+        }
+      ]
+    }
+  ],
+  "templating": { "list": [] }
+}

@@ -1,0 +1,31 @@
+# Normalize line endings for cross-platform collaboration (Windows host + Linux containers)
+* text=auto
+
+# Source code
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.mjs text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=crlf
+
+# Shell scripts must stay LF even on Windows
+*.sh text eol=lf
+
+# Binary assets
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.tif binary
+*.tiff binary
+*.hdf binary
+*.hdf5 binary
+*.nc binary

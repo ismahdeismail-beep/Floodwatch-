@@ -1,0 +1,4 @@
+# Copy to terraform.tfvars and fill in real values.
+project_id = "floodwatch-ai"
+region     = "europe-west2"
+image_tag  = "latest"

@@ -1,0 +1,4 @@
+# Optional heavy dependencies for analytics (not installed by default).
+
+# Model performance tracking
+mlflow>=2.16

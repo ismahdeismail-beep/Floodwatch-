@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-slate-950 text-slate-200 antialiased;
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+}

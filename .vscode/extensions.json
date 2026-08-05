@@ -1,0 +1,26 @@
+{
+  "recommendations": [
+    "eamodio.gitlens",
+    "usernamehw.errorlens",
+    "aaron-bond.better-comments",
+    "Gruntfuggly.todo-tree",
+    "rangav.vscode-thunder-client",
+    "humao.rest-client",
+    "ms-azuretools.vscode-docker",
+    "github.vscode-pull-request-github",
+    "continue.continue",
+    "saoudrizwan.claude-dev",
+    "RooVetGit.roo-code",
+    "ms-python.python",
+    "ms-python.pylance",
+    "ms-python.black-formatter",
+    "ms-toolsai.jupyter",
+    "redhat.vscode-yaml",
+    "yzhang.markdown-all-in-one",
+    "shd101wyy.markdown-preview-enhanced",
+    "christian-kohler.path-intellisense",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss"
+  ]
+}

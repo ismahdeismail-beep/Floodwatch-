@@ -1,0 +1,12 @@
+# Optional heavy dependencies for satellite (not installed by default).
+
+# Raster IO
+rasterio>=1.3
+# Multi-dimensional array processing
+xarray>=2024.1
+# Raster + xarray integration
+rioxarray>=0.16
+# Image processing
+opencv-python>=4.10
+# Deep learning segmentation models
+torch>=2.4

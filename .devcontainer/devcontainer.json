@@ -1,0 +1,31 @@
+{
+  "name": "FloodWatch AI Dev Environment",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "postCreateCommand": "npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-python.python",
+        "ms-python.pylance",
+        "ms-azuretools.vscode-docker",
+        "bradlc.vscode-tailwindcss",
+        "redhat.vscode-yaml"
+      ]
+    }
+  },
+  "mounts": [
+    "source=floodwatch-bashhistory,target=/commandhistory,type=volume"
+  ],
+  "remoteUser": "codespace"
+}
