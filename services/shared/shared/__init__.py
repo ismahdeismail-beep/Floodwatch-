@@ -11,6 +11,7 @@ from shared.errors import (
 )
 from shared.logging import get_request_id, request_id_var, set_request_id, setup_logging
 from shared.middleware import RequestIDMiddleware
+from shared.routes import health_router, ready_router
 
 __version__ = "0.1.0"
 
@@ -30,4 +31,6 @@ __all__ = [
     "InternalError",
     "register_error_handlers",
     "Cache",
+    "health_router",
+    "ready_router",
 ]
