@@ -32,10 +32,7 @@
     "sharp": true,
     "unrs-resolver": true
   },
-  "dependencies": {
-    "@next/swc-win32-x64-msvc": "^15.5.22",
-    "@turbo/windows-64": "^2.10.8"
-  },
+  "dependencies": {},
   "overrides": {
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4"
