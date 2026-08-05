@@ -15,7 +15,7 @@
     "@floodwatch/types": "*",
     "@floodwatch/ui": "*",
     "@floodwatch/utils": "*",
-    "maplibre-gl": "^4.7.1",
+    "maplibre-gl": "^6.1.0",
     "next": "^15.1.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
