@@ -40,14 +40,19 @@ Push-Location $root
 if (-not $SkipNode) {
     Invoke-Stage "typecheck" {
         if (-not (Test-Path "node_modules\turbo\bin\turbo")) { throw "turbo not installed - run 'npm install' first" }
-        node node_modules\turbo\bin\turbo run typecheck --continue 2>&1 | ForEach-Object { Write-Host $_ }
+        # Run via cmd /c: turbo writes its banner to stderr, and PowerShell 5.1 wraps
+        # native stderr as terminating errors when $ErrorActionPreference = "Stop",
+        # which killed this stage before turbo could run. cmd merges the streams.
+        cmd /c "node node_modules\turbo\bin\turbo run typecheck --continue 2>&1"
+        if ($LASTEXITCODE -ne 0) { throw "typecheck failed (exit code $LASTEXITCODE)" }
     }
 }
 
 # 2. Lint
 if (-not $SkipNode) {
     Invoke-Stage "lint" {
-        node node_modules\turbo\bin\turbo run lint --continue 2>&1 | ForEach-Object { Write-Host $_ }
+        cmd /c "node node_modules\turbo\bin\turbo run lint --continue 2>&1"
+        if ($LASTEXITCODE -ne 0) { throw "lint failed (exit code $LASTEXITCODE)" }
     }
 }
 
